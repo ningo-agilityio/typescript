@@ -1,4 +1,10 @@
 class Vehicle {
+    public color: string;
+
+    constructor(color: string) {
+        this.color = color;
+    }
+
     drive(): void {
         console.log("zin zin");
     }
@@ -9,10 +15,15 @@ class Vehicle {
 }
 
 class Car extends Vehicle {
+    constructor(color: string) {
+        super(color);
+    }
+
     drive(): void {
-        console.log("bim bim");
+        console.log(`My car is in ${this.color}, fires bim bim`);
     }
 }
 
-const myCar = new Car();
+const myCar = new Car("orange");
 myCar.drive();
+myCar.honk();
