@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var NumberCollection_1 = require("./NumberCollection");
 var CharactersCollection_1 = require("./CharactersCollection");
+var LinkedList_1 = require("./LinkedList");
 var Sorter = /** @class */ (function () {
     function Sorter(collection) {
         this.collection = collection;
@@ -26,3 +27,12 @@ console.log(sorter.collection);
 var sorter2 = new Sorter(new CharactersCollection_1.CharactersCollection('zbay'));
 sorter2.sort();
 console.log(sorter2.collection);
+// Linked list
+var linkedList = new LinkedList_1.LinkedList();
+linkedList.add(100);
+linkedList.add(-2);
+linkedList.add(0);
+linkedList.add(1);
+var sorter3 = new Sorter(linkedList);
+sorter3.sort();
+linkedList.print();

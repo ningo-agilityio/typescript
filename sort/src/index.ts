@@ -1,5 +1,6 @@
 import { NumberCollection } from './NumberCollection'
 import { CharactersCollection } from './CharactersCollection'
+import { LinkedList } from './LinkedList'
 
 interface Sortable {
   length: number;
@@ -33,3 +34,13 @@ console.log(sorter.collection);
 const sorter2 = new Sorter(new CharactersCollection('zbay'));
 sorter2.sort();
 console.log(sorter2.collection);
+
+// Linked list
+const linkedList = new LinkedList();
+linkedList.add(100);
+linkedList.add(-2);
+linkedList.add(0);
+linkedList.add(1);
+const sorter3 = new Sorter(linkedList);
+sorter3.sort();
+linkedList.print();
