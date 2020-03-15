@@ -1,9 +1,12 @@
+
+import { Sorter } from './Sorter'
+
 class CustomNode {
   next: CustomNode | null = null;
   constructor(public data: number) {}
 }
 
-export class LinkedList {
+export class LinkedList extends Sorter {
   // Tail of this node is head of next node
   head: CustomNode | null = null;
 
