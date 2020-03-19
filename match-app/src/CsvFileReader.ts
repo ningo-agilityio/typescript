@@ -1,28 +1,19 @@
 import fs from "fs";
-import { parseDate } from "./Utils";
 
-export class CsvFileReader {
-  data: string[][] = [];
+/// T: Type of any data
+export abstract class CsvFileReader<T> {
+  data: T[] = [];
 
   constructor(public filename: string) {
   }
+
+  abstract mapRow(row: string[]): T;
 
   read(): void {
     this.data = fs.readFileSync(this.filename, {
       encoding: "utf-8"
     }).split("\n").map((row: string): string[] => {
       return row.split(",");
-    }).map((row: string[]): any => {
-      return [
-        parseDate(row[0]),
-        row[1],
-        row[2],
-        parseInt(row[3]),
-        parseInt(row[4]),
-        row[5],
-        row[6],
-        row[7]
-      ]
-    });
+    }).map(this.mapRow);
   }
 }
