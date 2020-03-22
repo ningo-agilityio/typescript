@@ -1,6 +1,6 @@
 import { MatchData } from '../MatchData';
 import { Analyzer } from './Summary';
-import { TEAM, MATCH_RESULT } from '../Constants';
+import { MATCH_RESULT } from '../Constants';
 
 export class WinAnalysis implements Analyzer {
   constructor(public team: string){}
