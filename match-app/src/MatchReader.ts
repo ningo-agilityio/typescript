@@ -26,6 +26,10 @@ interface DataReader {
 
 // 2. Interface approaching way ===================================
 export class MatchReader {
+  static fromCsv(filename: string) {
+    return new MatchReader(new CsvFileReader(filename));
+  }
+
   matches: MatchData[] = [];
 
   constructor(public reader: DataReader){}

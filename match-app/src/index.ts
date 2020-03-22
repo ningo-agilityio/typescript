@@ -1,6 +1,5 @@
 import { MatchReader } from "./MatchReader";
 import { TEAM } from "./Constants";
-import { CsvFileReader } from './CsvFileReader';
 // import { MatchData } from './MatchData';
 import { WinAnalysis } from './analyzer/WinAnalysis';
 import { Summary } from './analyzer/Summary';
@@ -11,13 +10,9 @@ import { Report } from './analyzer/Report';
 // reader.read();
 
 // 2. Interface approaching way ===================================
-const csvFileReader = new CsvFileReader("data.csv");
-const matchReader = new MatchReader(csvFileReader);
+const matchReader = MatchReader.fromCsv("data.csv");
 matchReader.load();
 
-const summary = new Summary(
-  new WinAnalysis(TEAM.ManUnited), 
-  new Report()
-);
+const summary = Summary.matchReport(TEAM.ManUnited);
 summary.buildAndPrintReport(matchReader.matches);
 summary.buildAndExportHtmlReport(matchReader.matches);
