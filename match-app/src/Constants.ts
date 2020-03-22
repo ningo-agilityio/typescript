@@ -8,14 +8,3 @@ export enum MATCH_RESULT {
 export enum TEAM {
   ManUnited = "Man United"
 }
-
-export type MatchDataType = [
-  Date,
-  string,
-  string,
-  number,
-  number,
-  MATCH_RESULT,
-  string,
-  string
-];
