@@ -1,7 +1,8 @@
 import { MatchReader } from "./MatchReader";
-import { MATCH_RESULT, TEAM } from "./Constants";
+import { TEAM } from "./Constants";
 import { CsvFileReader } from './CsvFileReader';
 // import { MatchData } from './MatchData';
+import { WinAnalysis } from './analyzer/WinAnalysis';
 
 // 1. T approaching way ===========================================
 // const reader = new MatchReader("data.csv");
@@ -11,14 +12,6 @@ import { CsvFileReader } from './CsvFileReader';
 const csvFileReader = new CsvFileReader("data.csv");
 const matchReader = new MatchReader(csvFileReader);
 matchReader.load();
-const data = matchReader.matches;
 
-let unitedWonMatches = 0;
-for (let match of data) {
-  if ((match[1] === TEAM.ManUnited && match[5] === MATCH_RESULT.HomeWin) ||
-    (match[2] === TEAM.ManUnited && match[5] === MATCH_RESULT.AwayWin)) {
-    unitedWonMatches++;
-  }
-}
-
-console.log(`United team won ${unitedWonMatches} matches`);
+const report = new WinAnalysis(TEAM.ManUnited);
+console.log(report.run(matchReader.matches));
