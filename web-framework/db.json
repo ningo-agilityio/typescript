@@ -1,0 +1,36 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "users": [
+    {
+      "id": 1,
+      "name": "Nelly Ngo",
+      "age": 29
+    },
+    {
+      "name": "Nee Ngo",
+      "age": 29,
+      "id": 2
+    },
+    {
+      "name": "Nee Ngo",
+      "age": 29,
+      "id": 3
+    }
+  ]
+}

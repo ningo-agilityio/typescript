@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var User_1 = require("./models/User");
+var user = new User_1.User({ name: "Nee", age: 29 });
+console.log(user.get("name"));
+console.log(user.get("age"));
+console.log("After getting old");
+user.set({ "age": 30, name: "Nee Ngo" });
+console.log(user.get("name"));
+console.log(user.get("age"));
+user.on('change', function () { });
