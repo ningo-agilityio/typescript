@@ -2,10 +2,12 @@ import { User } from './models/User';
 import { Event } from './models/Event';
 
 // Get existing user
-const user = User.fromData({ id: 1 });
-user.fetch();
-setTimeout(() => {}, 4000);
-console.log(user);
+const user = new User({ id: 1 });
+user.events.on('change', () => {});
+
+// user.fetch();
+// setTimeout(() => {}, 4000);
+// console.log(user);
 
 // Update existing user
 // user.set({ name: 'Nelly Ngo', age: 29 });

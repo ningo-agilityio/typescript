@@ -1,7 +1,6 @@
-import axios, { AxiosResponse } from "axios";
 import { API_URL, UserProps } from '../constants';
 import { Event } from './Event';
-
+import { ApiClient } from './ApiClient';
 
 export class User {
   // Option 3
@@ -24,8 +23,10 @@ export class User {
   // ) { }
 
   // Option 1
+  public events: Event = new Event();
+  public apiClient: ApiClient<UserProps> = new ApiClient(API_URL);
+
   constructor(
-    private events: Event,
     private data: UserProps,
   ) { }
 
@@ -35,29 +36,5 @@ export class User {
 
   set(update: UserProps): void {
     Object.assign(this.data, update);
-  }
-
-  fetch():void {
-    axios.get(API_URL + `/${this.get('id')}`)
-      .then((response: AxiosResponse):void => {
-        this.set(response.data);
-      });
-  }
-
-  save(): void {
-    const id = this.get('id');
-    if (id) {
-      // PUT (update)
-      axios.put(API_URL + `/${id}`, this.data)
-        .then((response: AxiosResponse): void => {
-          this.set(response.data);
-        });
-    } else {
-      // POST (add)
-      axios.post(API_URL, this.data)
-        .then((response: AxiosResponse): void => {
-          this.set(response.data);
-        });
-    }
   }
 }
