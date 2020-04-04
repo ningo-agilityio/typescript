@@ -75,10 +75,10 @@ export class User extends Model<UserProps> {
 
   static build(attrs: UserProps) {
     return new User(
-      new Attributes(attrs), 
-      new Event(), 
+      new Attributes(attrs),
+      new Event(),
       new ApiClient(API_URL)
-    ) ;
+    );
   }
 
   static buildCollection() {
@@ -87,4 +87,9 @@ export class User extends Model<UserProps> {
       (json: UserProps) => User.build(json)
     );
   }
- }
+
+  setRandomAge = (): void => {
+    const age = Math.round(Math.random() * 100);
+    this.set({ age });
+  }
+}

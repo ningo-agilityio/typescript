@@ -1,9 +1,14 @@
-export class UserForm {
-  constructor(public parent: Element) {}
+import { User } from "../models/User";
+import { UserProps } from "../constants";
+import { View } from "./View";
 
+export class UserForm extends View<User, UserProps> {
   eventsMap(): { [key: string]: () => void } {
     return {
-      'click:button': this.onClick
+      'click:button': this.onClick,
+      'click:.set-age': this.onSetRandomAge,
+      'click:.set-name': this.onSetName,
+      'click:.save-user': this.onSaveUser,
     };
   }
 
@@ -11,31 +16,30 @@ export class UserForm {
     console.log('click me');
   }
 
-  bindEvents(documentFragment: DocumentFragment) {
-    const eventsMap = this.eventsMap();
+  onSetRandomAge = (): void => {
+    this.model.setRandomAge();
+  }
 
-    for(let eventKey in eventsMap) {
-      const [eventName, selector] = eventKey.split(":");
-      documentFragment.querySelectorAll(selector).forEach(element => {
-        element.addEventListener(eventName, eventsMap[eventKey]);
-      })
+  onSetName = (): void => {
+    const input = this.parent.querySelector(".new-name");
+    if (input) {
+      this.model.set({ name: input.value });
     }
+  }
+
+  onSaveUser = (): void => {
+    this.model.save();
   }
 
   template(): string {
     return `
       <di>
         <h1>User Form</h1>
-        <input />
-        <button>click me</button>
+        <input class='new-name' placeholder='${this.model.get("name")}' />
+        <button class='set-name'>Set name</button>
+        <button class='set-age'>Set random age</button>
+        <button class='save-user'>Save user</button>
       </div>
     `;
-  }
-
-  render() {
-    const userForm = document.createElement("template");
-    userForm.innerHTML = this.template();
-    this.bindEvents(userForm.content);
-    this.parent.append(userForm.content);
   }
 }

@@ -1,13 +1,22 @@
 import { User } from './models/User';
-import { UserForm } from './views/UserForm';
+import { UserEdit } from './views/UserEdit';
+import { UserList } from './views/UserList';
+import { Collection } from './models/Collection';
+import { API_URL, UserProps } from './constants';
 
 // Get existing user
-// const collection = User.buildCollection();
+const users = new Collection(API_URL, (json: UserProps) => {
+  return User.build(json);
+});
 
-// collection.on('change', () => {
-//   console.log(collection);
-// });
-// collection.fetch();
+users.fetch();
 
-const userForm = new UserForm(document.getElementById("root"));
-userForm.render();
+users.on('change', () => {
+  const rootElement = document.getElementById("root");
+  if (rootElement) {
+    new UserList(rootElement, users).render();
+  }
+});
+
+
+// const user = User.build({ name: "Nee", age: 20 });
