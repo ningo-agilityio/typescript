@@ -7,3 +7,7 @@ export interface UserProps {
 export type Callback = () => void
 
 export const API_URL = 'http://localhost:3000/users';
+
+export interface HasId {
+  id?: number;
+}

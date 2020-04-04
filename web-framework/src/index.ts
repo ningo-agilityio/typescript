@@ -1,20 +1,13 @@
 import { User } from './models/User';
-import { Event } from './models/Event';
+import { UserForm } from './views/UserForm';
 
 // Get existing user
-const user = new User({ id: 1 });
-user.events.on('change', () => {});
+// const collection = User.buildCollection();
 
-// user.fetch();
-// setTimeout(() => {}, 4000);
-// console.log(user);
+// collection.on('change', () => {
+//   console.log(collection);
+// });
+// collection.fetch();
 
-// Update existing user
-// user.set({ name: 'Nelly Ngo', age: 29 });
-// user.save();
-// console.log(user);
-
-// Add new user
-// const newUser = new User({ id: 4 });
-// newUser.set({ name: 'Nee123 Ngo', age: 29 });
-// console.log(newUser);
+const userForm = new UserForm(document.getElementById("root"));
+userForm.render();
