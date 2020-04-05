@@ -12,13 +12,28 @@ interface AppProps {
   deleteTodo(id: number): any;
 }
 
-class _App extends React.Component<AppProps> {
+interface AppState {
+  fetching: boolean;
+}
+
+class _App extends React.Component<AppProps, AppState> {
+  state = { fetching: false }
+
   constructor(props: AppProps) {
     super(props);
+
+    this.state = { fetching: false }
+  }
+
+  componentDidUpdate(prevProps: AppProps) {
+    if (!prevProps.todos.length && this.props.todos.length) {
+      this.setState({ fetching: false })
+    }
   }
 
   onFetchClick = (): void => {
     this.props.fetchTodos()
+    this.setState({ fetching: true })
   }
 
   renderList(): JSX.Element[] {
@@ -38,7 +53,11 @@ class _App extends React.Component<AppProps> {
     return (
       <div className="App">
         <button onClick={this.onFetchClick}>Fetch</button>
-        {this.renderList()}
+
+        {
+          this.state.fetching ? 'Loading...' :
+            this.renderList()
+        }
       </div>
     );
   }
