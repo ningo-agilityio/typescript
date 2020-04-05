@@ -1,23 +1,11 @@
-import { NumberCollection } from './NumberCollection'
-import { CharactersCollection } from './CharactersCollection'
-import { LinkedList } from './LinkedList'
-import { Sorter } from './Sorter'
+import express, { Request, Response } from 'express';
+import { router } from './LoginRoute';
+import bodyParser from 'body-parser';
 
-// Number collection
-const numbers = new NumberCollection([0, 10, -2, 5]);
-numbers.sort();
-console.log(numbers.data);
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(router);
 
-// Character collection
-const characters = new CharactersCollection('zbay');
-characters.sort();
-console.log(characters.data);
-
-// Linked list
-const linkedList = new LinkedList();
-linkedList.add(100);
-linkedList.add(-2);
-linkedList.add(0);
-linkedList.add(1);
-linkedList.sort();
-linkedList.print();
+app.listen(3001, () => {
+  console.log("Listen on port 3000");
+})
