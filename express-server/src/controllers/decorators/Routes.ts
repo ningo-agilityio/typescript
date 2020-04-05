@@ -1,5 +1,6 @@
 import 'reflect-metadata';
-import { Methods, MetadataKeys } from '../decorators'
+import { Methods } from './Methods'
+import { MetadataKeys } from './MetadataKeys'
 
 function routeBinder(method: string) {
   return function (path: string) {
